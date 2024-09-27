@@ -4,11 +4,12 @@ const v = new Validator();
 
 module.exports = async (req, res) => {
   try {
-    const { user_id, refresh_token } = req.body;
+    const { userId } = req.body;
+    const { refreshToken } = req.body;
 
     const Schema = {
-      user_id: "number",
-      refresh_token: "string",
+      userId: "number",
+      refreshToken: "string",
     };
 
     const validate = v.validate(req.body, Schema);
@@ -19,8 +20,8 @@ module.exports = async (req, res) => {
       });
     }
 
-    const user = await User.findByPk(user_id);
-    
+    const user = await User.findByPk(userId);
+
     if (!user) {
       return res.status(404).json({
         status: "error",
@@ -29,8 +30,8 @@ module.exports = async (req, res) => {
     }
 
     const newRefreshToken = await RefreshToken.create({
-      token: refresh_token,
-      user_id: user_id,
+      token: refreshToken,
+      user_id: userId,
     });
 
     return res.status(200).json({

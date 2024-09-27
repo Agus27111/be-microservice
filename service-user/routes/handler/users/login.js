@@ -1,7 +1,6 @@
 const bcrypt = require("bcryptjs");
 const { User } = require("../../../models");
 const Validator = require("fastest-validator");
-const jwt = require("jsonwebtoken");
 
 const v = new Validator();
 
@@ -42,10 +41,6 @@ module.exports = async (req, res) => {
       });
     }
 
-    const token = jwt.sign({ id: user.id }, process.env.SECRET_KEY, {
-      expiresIn: "1d",
-    });
-
     return res.status(200).json({
       status: "success",
       data: {
@@ -55,9 +50,7 @@ module.exports = async (req, res) => {
         profession: user.profession,
         avatar: user.avatar,
         role: user.role,
-        token: user.token,
       },
-      token: token,
     });
   } catch (error) {
     return res.status(500).json({
