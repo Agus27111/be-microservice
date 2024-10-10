@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"name": "be-microservices",
+			"path": "../../../.."
+		},
+		{
+			"name": "service-course",
+			"path": "../../../../../Microservices - Main/Asset-20240916T152205Z-001/Asset/bwamicro/service-course"
+		}
+	],
+	"settings": {}
+}
